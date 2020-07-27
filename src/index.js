@@ -2,24 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-const elm = <h1> this is my element! </h1>
-
-function tick(){
-    const timeElement = (
-        <div>
-            time is: {''}
-            {new Date().toTimeString()}
-        </div>
-    )
-
-    ReactDOM.render(
-        <div>
-            {elm}
-            {timeElement}
-        </div>,
-        document.getElementById('root')
+function hello(props) {
+    return(
+        <h1> hello, {props.name}</h1>
     )
 }
 
-setInterval(tick, 1000);
+ReactDOM.render(
+    hello({name: "amir"}),
+    document.getElementById('root')
+)
 
