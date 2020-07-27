@@ -10,8 +10,18 @@ class Hello extends React.Component{
     }
 }
 
+function App(){
+    return(
+        <div>
+            <Hello name={"Amir"} />
+            <Hello name={"Reza"} />
+            <Hello name={"Agn"} />
+        </div>
+    )
+}
+
 ReactDOM.render(
-    <Hello name="Amir" />,
+    <App/>,
     document.getElementById('root')
 )
 
