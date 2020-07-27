@@ -2,19 +2,38 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+
+function Auther(props) {
+    return(
+        <div className={"auther"} >
+            <img src={props.auther.avatar} />
+            {props.auther.name}
+        </div>
+    )
+}
+
+function CommentText(props) {
+    return(
+        <div className={"comment-text"}>
+            {props.text}
+        </div>
+    )
+}
+
+function CommentDate(props) {
+    return(
+        <div className={"comment-date"}>
+            {props.date}
+        </div>
+    )
+}
+
 function App(props){
     return(
         <div>
-            <div className={"auther"} >
-                <img src={props.comment.auther.avatar} />
-                {props.comment.auther.name}
-            </div>
-            <div className={"comment-text"}>
-                {props.comment.text}
-            </div>
-            <div className={"comment-date"}>
-                {props.comment.date}
-            </div>
+            <Auther auther={props.comment.auther} />
+            <CommentText text={props.comment.text} />
+            <CommentDate date={props.comment.date} />
         </div>
     )
 }
