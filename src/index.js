@@ -2,50 +2,49 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+class Clock extends React.Component{
 
-function Auther(props) {
-    return(
-        <div className={"auther"} >
-            <img src={props.auther.avatar} />
-            {props.auther.name}
-        </div>
-    )
-}
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date().toLocaleTimeString()
+        }
+    }
 
-function CommentText(props) {
-    return(
-        <div className={"comment-text"}>
-            {props.text}
-        </div>
-    )
-}
+    tick(){
+        this.setState({date: new Date().toLocaleTimeString()});
+    }
 
-function CommentDate(props) {
-    return(
-        <div className={"comment-date"}>
-            {props.date}
-        </div>
-    )
+    componentDidMount() {
+        this.tickId = setInterval( ()=>this.tick(), 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.tickId)
+    }
+
+    render() {
+        return(
+            <div>
+                <h1>Hello, Amir</h1>
+                <h2> It is {this.state.date}</h2>
+            </div>
+        )
+    }
 }
 
 function App(props){
     return(
         <div>
-            <Auther auther={props.comment.auther} />
-            <CommentText text={props.comment.text} />
-            <CommentDate date={props.comment.date} />
+            <Clock/>
+            <Clock/>
+            <Clock/>
         </div>
     )
 }
 
-const comment = {
-    auther: {name: "Amir", avatar: "url"},
-    text: "my first comment",
-    date: new Date().toDateString()
-};
-
 ReactDOM.render(
-    <App comment={comment} />,
+    <App />,
     document.getElementById('root')
 )
 
