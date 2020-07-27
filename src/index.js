@@ -2,26 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-class Hello extends React.Component{
-    render() {
-        return(
-            <h1>Hello, {this.props.name}</h1>
-        )
-    }
-}
-
-function App(){
+function App(props){
     return(
         <div>
-            <Hello name={"Amir"} />
-            <Hello name={"Reza"} />
-            <Hello name={"Agn"} />
+            <div className={"auther"} >
+                <img src={props.comment.auther.avatar} />
+                {props.comment.auther.name}
+            </div>
+            <div className={"comment-text"}>
+                {props.comment.text}
+            </div>
+            <div className={"comment-date"}>
+                {props.comment.date}
+            </div>
         </div>
     )
 }
 
+const comment = {
+    auther: {name: "Amir", avatar: "url"},
+    text: "my first comment",
+    date: new Date().toDateString()
+};
+
 ReactDOM.render(
-    <App/>,
+    <App comment={comment} />,
     document.getElementById('root')
 )
 
