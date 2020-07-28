@@ -2,71 +2,44 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-function LoginButton(props) {
-    return <button onClick={props.onClick}>Login</button>
-}
-
-function LogoutButton(props) {
-    return <button onClick={props.onClick}>Logout</button>
-}
-
-function User(props) {
-    return(
-        <div>
-            Hello User
-            {
-                props.unReadMessage > 0 &&
-                <div>
-                    You have {props.unReadMessage} unread messages.
-                    {/*You have unread messages.*/}
-                </div>
-            }
-        </div>
-    )
-}
-
-function Guest(props) {
-    return(
-        <div>
-            Welcome Guest
-        </div>
-    )
-}
 
 class App extends React.Component{
     constructor(props) {
         super(props);
-
         this.state = {
-            isLoggedin: false
+            name: '',
+            address: ''
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit=this.handleSubmit.bind(this);
     }
 
-    handleLogout(){
-        this.setState({
-            isLoggedin: false
-        })
+    handleChange(event){
+        this.setState( {[event.target.name]: event.target.value.toUpperCase()});
+        console.log(this.state);
     }
 
-    handleLogin(){
-        this.setState({
-            isLoggedin: true
-        })
+    handleSubmit(event){
+        event.preventDefault();
+        alert(this.state.name + ' ' + this.state.address);
     }
 
     render() {
-        let button = null;
-        if (this.state.isLoggedin ) {
-            button = <LogoutButton onClick={(e) => this.handleLogout()} />
-        }
-        else {
-            button = <LoginButton onClick={(e) => this.handleLogin()} />
-        }
         return(
             <div>
-                {this.state.isLoggedin ? <User unReadMessage={1} /> : <Guest/>}
-                <br/>
-                {button}
+                <form onSubmit={this.handleSubmit} >
+                    <label>
+                        Name:
+                        <input name={"name"} value={this.state.name} type={"text"} onChange={this.handleChange} />
+                    </label>
+                    <label>
+                        Address:
+                        <textarea name={"address"} value={this.state.address} type={"text"} onChange={this.handleChange} />
+                    </label>
+
+                    <input type={"submit"} value={"Ok"} />
+                </form>
             </div>
         )
     }
@@ -74,6 +47,6 @@ class App extends React.Component{
 
 
 ReactDOM.render(
-    <App isLoggedIn={true} />,
+    <App />,
     document.getElementById('root')
 )
