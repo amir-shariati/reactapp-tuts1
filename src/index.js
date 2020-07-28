@@ -10,9 +10,9 @@ class App extends React.Component{
             value: "OFF"
         }
 
-        this.toggleValue = this.toggleValue.bind(this);
+        // this.toggleValue = this.toggleValue.bind(this);
     }
-    toggleValue(){
+    toggleValue = () => {
        this.setState( (prevState) => ({
            value: prevState.value == "OFF" ? "ON" : "OFF"
        }))
