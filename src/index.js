@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class App extends React.Component{
-    showMessage(msg){
-        alert(msg);
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            value: "OFF"
+        }
+
+        this.toggleValue = this.toggleValue.bind(this);
+    }
+    toggleValue(){
+       this.setState( (prevState) => ({
+           value: prevState.value == "OFF" ? "ON" : "OFF"
+       }))
     }
     render() {
         return (
-            <button onClick={()=>this.showMessage('clicked on button')}>
-                Click Me.
+            <button onClick={() => this.toggleValue() }>
+                {this.state.value}
             </button>
         )
     }
