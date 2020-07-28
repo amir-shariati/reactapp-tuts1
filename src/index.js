@@ -14,6 +14,13 @@ function User(props) {
     return(
         <div>
             Hello User
+            {
+                props.unReadMessage > 0 &&
+                <div>
+                    You have {props.unReadMessage} unread messages.
+                    {/*You have unread messages.*/}
+                </div>
+            }
         </div>
     )
 }
@@ -57,7 +64,7 @@ class App extends React.Component{
         }
         return(
             <div>
-                {this.state.isLoggedin ? <User/> : <Guest/>}
+                {this.state.isLoggedin ? <User unReadMessage={1} /> : <Guest/>}
                 <br/>
                 {button}
             </div>
