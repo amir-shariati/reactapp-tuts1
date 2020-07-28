@@ -2,6 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+function LoginButton(props) {
+    return <button onClick={props.onClick}>Login</button>
+}
+
+function LogoutButton(props) {
+    return <button onClick={props.onClick}>Logout</button>
+}
+
 function User(props) {
     return(
         <div>
@@ -21,10 +29,39 @@ function Guest(props) {
 class App extends React.Component{
     constructor(props) {
         super(props);
+
+        this.state = {
+            isLoggedin: false
+        }
+    }
+
+    handleLogout(){
+        this.setState({
+            isLoggedin: false
+        })
+    }
+
+    handleLogin(){
+        this.setState({
+            isLoggedin: true
+        })
     }
 
     render() {
-        return this.props.isLoggedIn ? <User/> : <Guest/>
+        let button = null;
+        if (this.state.isLoggedin ) {
+            button = <LogoutButton onClick={(e) => this.handleLogout()} />
+        }
+        else {
+            button = <LoginButton onClick={(e) => this.handleLogin()} />
+        }
+        return(
+            <div>
+                {this.state.isLoggedin ? <User/> : <Guest/>}
+                <br/>
+                {button}
+            </div>
+        )
     }
 }
 
