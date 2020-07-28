@@ -12,14 +12,14 @@ class App extends React.Component{
 
         // this.toggleValue = this.toggleValue.bind(this);
     }
-    toggleValue = () => {
+    toggleValue() {
        this.setState( (prevState) => ({
            value: prevState.value == "OFF" ? "ON" : "OFF"
        }))
     }
     render() {
         return (
-            <button onClick={() => this.toggleValue() }>
+            <button onClick={(event) => this.toggleValue(this, event) }>
                 {this.state.value}
             </button>
         )
